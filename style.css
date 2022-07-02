@@ -21,6 +21,9 @@ html{
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
+@keyframes countdown{
+  
+}
 .countdown_bg{
   position: absolute;
   width: 100%;
@@ -38,14 +41,25 @@ html{
   font-family: 'Nunito', sans-serif;
   letter-spacing: 1px;
   color: black;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  font-family: 'Lobster', cursive;
+  padding: 10px;
+  border-radius: 10px;
+
 }
 .countdown_day,
 .countdown_hour,
 .countdown_minutes,
 .countdown_second{
-  color: #00a591;
+  color: #dc4c46;
+  font-family: 'Merriweather Sans', sans-serif;
   font-size: 90px;
   font-weight: 700px;
   text-align: center;
 
+}
+.happy_music{
+  visibility: hidden;
+  opacity: 0;
 }
