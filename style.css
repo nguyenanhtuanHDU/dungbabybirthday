@@ -5,16 +5,37 @@
 }
 html{
   scroll-behavior: smooth;
+}
+body{
+  position: relative;
+}
+.heart{
+  position: absolute;
+  color: #f62682;
+  font-size: 100px;
+  z-index: 999999;
+  animation: heart 2s linear 1;
+  transform-style: preserve-3d;
+}
+@keyframes heart{
+
+  100%{
+    top: 0;
+    transform:  rotate(360deg) scale(2) rotateY(360deg);
+  }
+}
+.container{
   background-image: linear-gradient(to left top, #6a5af9, #f62682);
   height: 100vh;
+  padding-top: 40px;
+  width: 100%;
 }
-
 
 .countdown{
   position: relative;
-  max-width: 600px;
+  width: 600px;
   height: 1200px;
-  margin: 180px auto;
+  margin: auto;
   padding: 0 20px;
   border-radius: 40px;
   overflow: hidden;
@@ -39,6 +60,7 @@ html{
 }
 .coudown__item{
   flex: 1 0 100%;
+  user-select: none;
 }
 .coudown__item img{
   width: 100%;
