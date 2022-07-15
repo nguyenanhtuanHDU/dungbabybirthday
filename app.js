@@ -2,9 +2,19 @@ const dayText = document.querySelector('.countdown_day');
 const hourText = document.querySelector('.countdown_hour');
 const minuteText = document.querySelector('.countdown_minutes');
 const secondText = document.querySelector('.countdown_second');
+const count = document.querySelector('.count')
 const countdownSlider = document.querySelector('.countdown_slider');
 const coudown_Item = document.querySelectorAll('.coudown__item');
 const container = document.querySelector('.container')
+const sound = document.querySelector('.sound')
+const audio = document.querySelector('.audio')
+const backPlay = document.querySelector('.back_play')
+const backPlayIcon = document.querySelector('.back_play i')
+const backNext = document.querySelector('.back_next')
+const backHeading = document.querySelector('.back_heading')
+const backName = document.querySelector('.back_name')
+const back_Img = document.querySelector('.back_img')
+const backPrev = document.querySelector('.back_prev')
 
 const linearColor = [
     '#ec008c',
@@ -34,6 +44,8 @@ const linearColor = [
     '#6dd5ed',
     '#2193b0'
 ]
+
+
 const heartTemplate = `      
 <div class="heart">
     <i class="fa-solid fa-heart"></i>
@@ -74,7 +86,144 @@ document.addEventListener('click', function(e){
     heart.style.color = `${linearColor[index]}`
     heart.style.left = `${e.pageX}px`
     heart.style.top = `${e.pageY}px`
+    sound.play()
     setTimeout(function(){
         document.body.removeChild(heart)
     }, 2000)
+})
+
+// let num = 0;
+// count.addEventListener('click', function(e){
+//     if(num < 2){
+//         num += 1
+//         if(num === 2){
+//             count.classList.toggle('active')
+//             num = 0
+//         }
+//     }
+// })
+
+const listMusic = [
+    {
+        name: 'Anh Đánh Rơi Người Yêu Này',
+        author: 'Andiez ft. AMEE',
+        link: 'Anh Đánh Rơi Người Yêu Này.mp3',
+        img: 'anh_danh_roi_nguoi_yeu_nay.jpg'
+    },
+    {
+        name: 'Bồ Em',
+        author: 'Dính',
+        link: 'Bồ Em.mp3',
+        img: 'bo_em.jpg'
+    },
+    {
+        name: 'Cứ Yêu Đi',
+        author: 'Đức Phúc',
+        link: 'Cứ Yêu Đi.mp3',
+        img: 'cu_yeu_di.jpg'
+    },
+    {
+        name: 'Em Là Hoàng Hôn',
+        author: 'Vang x Cloud 5',
+        link: 'Em Là Hoàng Hôn.mp3',
+        img: 'em_la_hoang_hon.jpg'
+    },
+    {
+        name: 'Em Thích',
+        author: 'SEAN X',
+        link: 'Em Thích.mp3',
+        img: 'em_thich.jpg'
+    },
+    {
+        name: 'Muốn Được Cùng Em',
+        author: 'FREAKY x CM1X',
+        link: 'Muốn Được Cùng Em.mp3',
+        img: 'muon_duoc_cung_em.jpg'
+    },
+    {
+        name: 'Ngày Đầu Tiên',
+        author: 'Đức Phúc',
+        link: 'Ngày Đầu Tiên.mp3',
+        img: 'ngay_dau_tien.jpg'
+    }
+]
+
+audio.volume = 0.2;
+let playing = true;
+let index2 = 0;
+if(index2 === 0){
+    backHeading.textContent = `${listMusic[0].author}`
+    backName.textContent = `${listMusic[0].name}`
+    back_Img.setAttribute('src', `./image/music/${listMusic[0].img}`)
+}
+
+backPlay.addEventListener('click', playMusic)
+
+function playMusic(){
+    if(playing === true){
+        audio.play()
+        backPlayIcon.classList.add('fa-pause')
+        backPlayIcon.classList.remove('fa-circle-play')
+        back_Img.classList.add('active')
+    
+        playing = false
+    
+    }else if(playing === false){
+        audio.pause()
+        backPlayIcon.classList.remove('fa-pause')
+        back_Img.classList.add('active')
+        backPlayIcon.classList.remove('fa-circle-play')
+    
+        playing = true
+    }
+}
+
+document.body.addEventListener('click', function(e){
+    console.log(e.target)
+})
+
+backNext.addEventListener('click', function(e){
+    index2 += 1;
+    if(index2 === listMusic.length){
+        index2 = 0;
+    }
+    audio.setAttribute('src', `./audio/mp3/${listMusic[index2].link}`)
+    backPlayIcon.classList.add('fa-pause')
+    backPlayIcon.classList.remove('fa-circle-play')
+    backHeading.textContent = `${listMusic[index2].author}`
+    backName.textContent = `${listMusic[index2].name}`
+    back_Img.setAttribute('src', `./image/music/${listMusic[index2].img}`)
+    playing = true
+    playMusic()
+    
+})
+
+backPrev.addEventListener('click', function(e){
+    index2 -= 1;
+    if(index2 === -1){
+        index2 = listMusic.length - 1
+    }
+    audio.setAttribute('src', `./audio/mp3/${listMusic[index2].link}`)
+    backPlayIcon.classList.add('fa-pause')
+    backPlayIcon.classList.remove('fa-circle-play')
+    backHeading.textContent = `${listMusic[index2].author}`
+    backName.textContent = `${listMusic[index2].name}`
+    back_Img.setAttribute('src', `./image/music/${listMusic[index2].img}`)
+    playing = true
+    playMusic()
+})
+
+audio.addEventListener('ended', function(e){
+    index2 += 1;
+    if(index2 === listMusic.length){
+        index2 = 0;
+    }
+    audio.setAttribute('src', `./audio/mp3/${listMusic[index2].link}`)
+    backPlayIcon.classList.add('fa-pause')
+    backPlayIcon.classList.remove('fa-circle-play')
+    backHeading.textContent = `${listMusic[index2].author}`
+    backName.textContent = `${listMusic[index2].name}`
+    back_Img.setAttribute('src', `./image/music/${listMusic[index2].img}`)
+    playing = true
+    playMusic()
 })
