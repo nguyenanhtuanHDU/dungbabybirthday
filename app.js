@@ -13,8 +13,11 @@ const backPlayIcon = document.querySelector('.back_play i')
 const backNext = document.querySelector('.back_next')
 const backHeading = document.querySelector('.back_heading')
 const backName = document.querySelector('.back_name')
-const back_Img = document.querySelector('.back_img')
+const backImg = document.querySelector('.back_img')
+const back_Img = document.querySelector('.back__img')
 const backPrev = document.querySelector('.back_prev')
+const backRange = document.querySelector('.back_range input')
+const backList = document.querySelector('.back_list')
 
 const linearColor = [
     '#ec008c',
@@ -148,14 +151,14 @@ const listMusic = [
     }
 ]
 
-audio.volume = 0.2;
+audio.volume = 0.4;
 let playing = true;
 let index2 = 0;
-if(index2 === 0){
-    backHeading.textContent = `${listMusic[0].author}`
-    backName.textContent = `${listMusic[0].name}`
-    back_Img.setAttribute('src', `./image/music/${listMusic[0].img}`)
-}
+// if(index2 === 0){
+//     backHeading.textContent = `${listMusic[0].author}`
+//     backName.textContent = `${listMusic[0].name}`
+//     backImg.setAttribute('src', `./image/music/${listMusic[0].img}`)
+// }
 
 backPlay.addEventListener('click', playMusic)
 
@@ -164,23 +167,19 @@ function playMusic(){
         audio.play()
         backPlayIcon.classList.add('fa-pause')
         backPlayIcon.classList.remove('fa-circle-play')
-        back_Img.classList.add('active')
-    
+        backImg.classList.add('active')
         playing = false
     
     }else if(playing === false){
         audio.pause()
         backPlayIcon.classList.remove('fa-pause')
-        back_Img.classList.add('active')
-        backPlayIcon.classList.remove('fa-circle-play')
+        backImg.classList.remove('active')
+        backPlayIcon.classList.add('fa-circle-play')
     
         playing = true
     }
 }
 
-document.body.addEventListener('click', function(e){
-    console.log(e.target)
-})
 
 backNext.addEventListener('click', function(e){
     index2 += 1;
@@ -195,7 +194,6 @@ backNext.addEventListener('click', function(e){
     back_Img.setAttribute('src', `./image/music/${listMusic[index2].img}`)
     playing = true
     playMusic()
-    
 })
 
 backPrev.addEventListener('click', function(e){
@@ -227,3 +225,66 @@ audio.addEventListener('ended', function(e){
     playing = true
     playMusic()
 })
+
+backRange.addEventListener('change', function(e){
+    audio.currentTime = backRange.value
+})
+
+function displayTimer() {
+    const { duration, currentTime } = audio;
+    backRange.max = duration;
+    backRange.value = currentTime;
+}
+setInterval(displayTimer, 500)
+
+listMusic.forEach(item => {
+
+    const backItem = document.createElement('div')
+    backItem.classList.add('back_item')
+    backItem.dataset.src = `${item.link}`
+    backItem.dataset.name = `${item.name}`
+    backItem.dataset.author = `${item.author}`
+    backItem.dataset.img = `${item.img}`
+    const backItemImg = document.createElement('img')
+    backItemImg.classList.add('back_item_img')
+    backItemImg.setAttribute('src', `./image/music/${item.img}`)
+    backItem.appendChild(backItemImg)
+    const backItemContent = document.createElement('div')
+    backItemContent.classList.add('back_item_content')
+    backItem.appendChild(backItemContent)
+    const backContentName = document.createElement('h3')
+    backContentName.classList.add('back_content_name')
+    backContentName.textContent = `${item.name}`
+    backItemContent.appendChild(backContentName)
+    const backContentAuthor = document.createElement('div')
+    backContentAuthor.classList.add('back_content_author')
+    backContentAuthor.textContent = `${item.author}`
+    backItemContent.appendChild(backContentAuthor)
+
+    backList.appendChild(backItem)
+})
+const backItem = document.querySelectorAll('.back_item')
+
+backList.addEventListener('click', function(e){
+    const clicked = e.target
+    console.log(clicked)
+    if(clicked.nodeName === 'SECTION') {
+        return;
+    }
+    [...backItem].forEach(item => item.classList.remove('active'))
+    clicked.classList.add('active')
+    audio.setAttribute('src', `./audio/mp3/${clicked.dataset.src}`)
+    backHeading.textContent = `${clicked.dataset.author}}`
+    backName.textContent = `${clicked.dataset.name}`
+    back_Img.setAttribute('src', `./image/music/${clicked.dataset.img}`)
+    console.log(clicked.offsetTop)
+    backList.scroll(0, clicked.offsetTop - clicked.offsetHeight)
+    playing = true
+    playMusic()
+})
+
+backList.addEventListener('scroll', function(e){
+    console.log(this.scrollTop)
+})
+
+

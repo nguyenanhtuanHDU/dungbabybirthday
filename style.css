@@ -41,7 +41,7 @@ body{
   position: relative;
   border: 1px solid red;
   width: 870px;
-  height: 1569px;
+  height: 1633px;
   margin: auto;
   transform-style: preserve-3d;
   transition: all 0.6s ease;
@@ -144,7 +144,8 @@ body{
   display: block;
   font-size: 45px;
   text-align: center;
-  margin-top: 16px;
+  margin-top: 48px;
+  margin-bottom: 31px;
   font-weight: 600;
 }
 .back_img::after{
@@ -200,12 +201,13 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 19px 47px;
-    margin: 39px 0;
+    margin: 86px 0 39px 0;
 }
 .back_reload, 
 .back_prev,
 .back_next,
 .back_random{
+  position: relative;
   font-size: 60px;
   cursor: pointer;
 }
@@ -227,27 +229,30 @@ body{
   color: #f62682;
   cursor: pointer;
 }
-.back_next{
-
-}
 .back_random{
 
 }
 .back_range{
   width: 100%;
-  padding: 40px;
+  padding: 53px;
 }
 .back_range input{
   width: 100%;
 }
 .back_list{
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 25px;
   overflow: scroll;
   scroll-behavior: smooth;
-  height: 743px;
+  height: 587px;
+}
+.back_item.active{
+  border: 10px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to right bottom, #2193b0 , #f62682);
 }
 .back_item{
   display: flex;
@@ -257,9 +262,12 @@ body{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin-bottom: 59px;
 }
+.back_item *{
+  pointer-events: none;
+}
 .back_item_img{
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   overflow: hidden;
   border-radius: 888px;
 }
