@@ -18,6 +18,8 @@ const back_Img = document.querySelector('.back__img')
 const backPrev = document.querySelector('.back_prev')
 const backRange = document.querySelector('.back_range input')
 const backList = document.querySelector('.back_list')
+const flipBack = document.querySelector('.flip_back')
+const flipFront = document.querySelector('.flip_front')
 
 const linearColor = [
     '#ec008c',
@@ -287,4 +289,16 @@ backList.addEventListener('scroll', function(e){
     console.log(this.scrollTop)
 })
 
+flipBack.addEventListener('click', function(e){
+    count.classList.toggle('active')
+    flipBack.classList.add('active')
+    flipFront.classList.remove('active')
 
+})
+
+flipFront.addEventListener('click', function(e){
+    count.classList.toggle('active')
+    flipFront.classList.add('active')
+    flipBack.classList.remove('active')
+
+})

@@ -37,9 +37,28 @@ body{
 .count.active{
   transform: rotateY(180deg);
 }
+.flip_back.active{
+  visibility: hidden;
+}
+.flip_back{
+  font-size: 53px;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    z-index: 9999999999;
+}
+.flip_front.active{
+  visibility: hidden;
+}
+.flip_front{
+  font-size: 53px;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  z-index: 9999999999;
+}
 .count{
   position: relative;
-  border: 1px solid red;
   width: 870px;
   height: 1633px;
   margin: auto;
